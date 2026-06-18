@@ -41,7 +41,7 @@ export const AppProvider = ({ children }) => {
     localStorage.removeItem('mannkibaat_session');
   };
 
-  const API_BASE = 'http://localhost:5000/api';
+  const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
 
   return (
     <AppContext.Provider value={{ user, language, setLanguage, isLoading, setIsLoading, loginUser, logoutUser, API_BASE, currentSessionId, setCurrentSessionId }}>
