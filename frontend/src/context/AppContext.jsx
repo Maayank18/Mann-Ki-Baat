@@ -41,7 +41,11 @@ export const AppProvider = ({ children }) => {
     localStorage.removeItem('mannkibaat_session');
   };
 
-  const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
+  let API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
+  // Foolproof check: if the Vercel env variable is missing '/api' at the end, add it automatically
+  if (API_BASE && !API_BASE.endsWith('/api')) {
+    API_BASE = API_BASE.replace(/\/$/, '') + '/api';
+  }
 
   return (
     <AppContext.Provider value={{ user, language, setLanguage, isLoading, setIsLoading, loginUser, logoutUser, API_BASE, currentSessionId, setCurrentSessionId }}>
